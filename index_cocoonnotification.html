@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Jwt-example</title>
+    <!-- <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'> -->
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+	  
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">Hello world!</div>
+    <div>
+    	<button onclick="sendOne()">Send a notification</button>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script>
+
+		function main() {
+			// You application code
+			var localService = Cocoon.Notification.Local;
+ 
+			localService.on('notification', function(userData){
+			    alert('Received local notification: ' + JSON.stringify(userData));
+			});
+			 
+			localService.initialize({}, function(registered){
+			    localService.registered = registered;
+			});
+
+			localService.on('notification', function(userData){
+			    alert('Received local notification: ' + JSON.stringify(userData));
+			});			
+
+		};
+
+		function sendOne(){
+			var notification = {
+			    message : "Hi, I am a notification",
+			    soundEnabled : true,
+			    badgeNumber : 1,
+			    userData : {"key1" : "value1", "key2": "value2", "index": index},
+			    contentBody : "Body",
+			    contentTitle : "Title",
+			    date : new Date().valueOf() + 5000
+			};
+
+			localService.send(notification, function(error){			 
+			    if (error) {
+			        alert('Error: ' + error.message);
+			    }
+			 
+			}); 
+		}
+
+		document.addEventListener('deviceready', main, false);
+		main();
+
+    </script>
+</body>
+
+</html>
