@@ -12,11 +12,8 @@
 </head>
 
 <body>
-    <div id="app">Hello world!</div>
-    <div>
-    	<button onclick="sendOne()">Send a notification</button>
-    </div>
-
+    <div id="app"></div>
+    <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
 
     <script>
@@ -35,11 +32,9 @@
 
 			localService.on('notification', function(userData){
 			    alert('Received local notification: ' + JSON.stringify(userData));
-			});			
+			});
 
-		};
-
-		function sendOne(){
+			
 			var notification = {
 			    message : "Hi, I am a notification",
 			    soundEnabled : true,
@@ -56,7 +51,7 @@
 			    }
 			 
 			}); 
-		}
+		};
 
 		document.addEventListener('deviceready', main, false);
 		main();
